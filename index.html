@@ -414,11 +414,15 @@
     btn.classList.add('loading');
 
     try {
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('whatsapp', wa);
+      formData.append('timestamp', new Date().toISOString());
+
       await fetch(SHEET_URL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, whatsapp: wa, timestamp: new Date().toISOString() })
+        body: formData
       });
 
       document.getElementById('waitlistForm').style.display = 'none';
